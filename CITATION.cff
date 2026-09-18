@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "Plant Stress Physiology"
+authors:
+  - family-names: "Hajam"
+    given-names: "Asif Hussain"
+type: software
+license: MIT
+repository-code: "https://github.com/asifhussain93/plant-stress-physiology"

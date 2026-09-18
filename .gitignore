@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+# Sensitive or unpublished material
+private/
+unpublished/
