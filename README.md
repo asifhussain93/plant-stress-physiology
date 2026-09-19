@@ -1,68 +1,66 @@
-# Plant Stress Physiology
+# taskbot Benchmark Pipeline
 
-> A research portfolio and reproducible-resource hub for plant responses to abiotic stress.
+> A repository scaffold for authoring original, repository-scale software-engineering benchmark tasks.
 
-![Plant stress physiology banner](assets/plant-stress-banner.svg)
+## Purpose
 
-## About
+This repository organizes a taskbot-style workflow for turning **new, unmerged feature ideas** from curated open-source repositories into self-contained benchmark tasks. Each task should use natural developer-facing instructions and a functional verifier that accepts correct alternative implementations.
 
-This repository presents the research interests, methods, and reproducibility resources of **Dr. Asif Hussain Hajam**, with a focus on how plants respond and adapt to environmental stress.
+This is a **scaffold and documentation repository**. It does not implement the taskbot CLI, GitHub integration, agent judges, or verifier gates yet. It provides the project structure needed to build those components safely and consistently.
 
-My doctoral research at Aligarh Muslim University investigated arsenic stress in *Ocimum basilicum* and the protective roles of kinetin, calcium, and nitric oxide. I am especially interested in translating stress physiology into resilient, sustainable crop production.
+## Core principles
 
-## Research themes
+- Original tasks: never-merged feature work, not harvested historical fixes.
+- Natural instructions: describe desired observable behavior without revealing the reference implementation.
+- Functional verification: test public behavior rather than internal implementation details.
+- Difficulty evidence: reject tasks that a frontier agent solves in one turn; retain a minimal, recorded hint ladder for accepted tasks.
+- Verifier robustness: verify the baseline, reference solution, regression behavior, stub rejection, alternative correct patches, and repeatability.
 
-- Abiotic-stress tolerance and stress signalling
-- Plant growth, photosynthesis, and PSII performance
-- Reactive oxygen species homeostasis and antioxidant defence
-- Heavy-metal toxicity and phytoprotection
-- Metabolite and essential-oil responses under stress
-- Crop physiology, phenotyping, and climate-resilient agriculture
+## Repository layout
 
-## Technical expertise
+```text
+.
+├── .taskbot/                 # Repository-level configuration
+├── .github/                  # Issue templates and CI workflow stubs
+├── backend/                  # Future API/service implementation
+├── frontend/                 # Future TypeScript dashboard implementation
+├── docs/                     # Workflow and authoring guidance
+├── lib/                      # Shared taskbot domain logic
+├── release-notes/            # Versioned release notes
+├── templates/task/           # Canonical task-directory scaffold
+├── tasks/                    # One directory per benchmark task
+├── tests/e2e/                # End-to-end workflow tests
+├── scripts/                  # Local helper scripts
+├── CONTRIBUTING.md
+└── README.md
+```
 
-| Area | Selected methods |
-| --- | --- |
-| Plant physiology | Growth traits, chlorophyll content, gas exchange, chlorophyll fluorescence |
-| Biochemistry | Antioxidant-enzyme assays, lipid peroxidation, ROS quantification |
-| Imaging and microscopy | ROS imaging, fluorescence microscopy, scanning electron microscopy |
-| Analytical methods | Elemental analysis, metabolite profiling, essential-oil analysis |
-| Data analysis | Experimental design, statistics, correlation analysis, PCA and multivariate analysis |
+## Task lifecycle
 
-## Repository map
+```text
+NEW → REPO_READY → DRAFT → SCOPED → SPEC_ALIGNED → TESTS_DRAFTED → REVIEWED → PUBLISHED
+```
 
-| Folder | What it contains |
-| --- | --- |
-| [`protocols/`](protocols) | Starter protocol notes for reproducible experiments |
-| [`docs/`](docs) | Research overview, methods, and reproducibility guidance |
-| [`data/`](data) | Guidance for adding public, well-documented datasets |
-| [`figures/`](figures) | Guidance for figures, images, and figure captions |
-| [`publications/`](publications) | Publication-list template and selected research outputs |
-| [`notebooks/`](notebooks) | Space for future R or Python analysis notebooks |
+The intended commands are `/bootstrap`, `/init`, `/scope`, `/verify-spec`, `/gen-tests`, `/review`, `/analyse`, and `/submit`. See [the workflow guide](docs/workflow.md) for what each stage must accomplish.
 
-## Getting started
+## Create your first task
 
-1. Read [`docs/research-overview.md`](docs/research-overview.md).
-2. Review and adapt a protocol in [`protocols/`](protocols).
-3. Add only non-confidential data with a clear README and metadata.
-4. Add reproducible analysis notebooks when datasets are available.
+1. Choose an active open-source repository and identify a genuine unmerged feature.
+2. Copy `templates/task/` to `tasks/<task-id>/`.
+3. Fill in `task.toml` and write the solver-visible `instruction.md`.
+4. Run the scope review before developing the hidden solution and verifier.
+5. Record the least-to-most-specific hints in `hint.md` after genuine agent attempts.
+6. Add a reproducible environment, verifier, reference patch, and alternative correct patches.
+7. Run the full gate battery and benchmark/failure analysis before publishing.
 
-## Suggested GitHub topics
+## Important author rule
 
-`plant-science` · `abiotic-stress` · `plant-physiology` · `photosynthesis` · `heavy-metal-stress` · `crop-science` · `sustainable-agriculture`
+During task authoring, the solver should receive **only** the task instruction. Do not pass hidden solutions, patches, tests, or unrelated task artifacts to the solver.
 
-## Contact
+## Status
 
-**Dr. Asif Hussain Hajam**  
-Ph.D. in Botany, Aligarh Muslim University, India  
-GitHub: [@asifhussain93](https://github.com/asifhussain93)
-
-Please use the repository issues for public questions. For research collaboration, add your preferred professional email address here before publishing.
-
-## Citation
-
-If this repository supports your work, please cite it using the metadata in [`CITATION.cff`](CITATION.cff).
+The repository includes a small working Python task-state model and a TypeScript frontend starter. The next engineering work is to implement the command runner, blind test-generation isolation, nine verifier gates, and benchmark-result storage.
 
 ## License
 
-This repository is released under the [MIT License](LICENSE). Do not upload unpublished results, personal data, or copyrighted publisher PDFs unless you have the right to share them.
+MIT. See [LICENSE](LICENSE).

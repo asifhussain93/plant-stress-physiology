@@ -1,18 +1,12 @@
-# Python
-__pycache__/
-*.py[cod]
-.ipynb_checkpoints/
-.venv/
+# Local taskbot configuration
+.taskbot/config.yaml
 
-# R
-.Rhistory
-.RData
-.Rproj.user/
-
-# Operating-system files
+# Build and editor files
 .DS_Store
-Thumbs.db
+__pycache__/
+.venv/
+node_modules/
 
-# Sensitive or unpublished material
-private/
-unpublished/
+# Local execution artefacts
+artifacts/
+logs/
